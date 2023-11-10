@@ -207,6 +207,7 @@ export const BooksList = () => {
                                                         <TableCell align="right">{book.isbn}</TableCell>
                                                         <TableCell>{book.category}</TableCell>
                                                         <TableCell align="right">{`$${book.price}`}</TableCell>
+
                                                         <TableCell>
                                                             <div className={classes.actionsContainer}>
                                                                 <Button
@@ -219,6 +220,7 @@ export const BooksList = () => {
                                                                 </Button>
                                                             </div>
                                                         </TableCell>
+                                                        
                                                     </TableRow>
                                                 ))}
                                             </TableBody>

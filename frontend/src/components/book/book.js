@@ -21,7 +21,7 @@ import { useUser } from "../../context/user-context"
 import { TabPanel } from "../tabs/tab"
 import { makeChartOptions } from "./chart-options"
 import classes from "./styles.module.css"
-
+import {issueDate, returnDate} from './date';
 export const Book = () => {
     const { bookIsbn } = useParams()
     const { user, isAdmin } = useUser()
@@ -29,7 +29,7 @@ export const Book = () => {
     const [book, setBook] = useState(null)
     const [chartOptions, setChartOptions] = useState(null)
     const [openTab, setOpenTab] = useState(0)
-
+    
     const borrowBook = () => {
         if (book && user) {
             BackendApi.user
@@ -145,6 +145,29 @@ export const Book = () => {
                                         </TableCell>
                                         <TableCell>${book.price}</TableCell>
                                     </TableRow>
+                                    {
+                                        book.borrowedBy.includes(user._id) && 
+                                        <>
+                                        <TableRow>
+                                            <TableCell variant = "head" component = 'th'>
+                                                Issued On
+                                            </TableCell>
+                                            <TableCell>
+                                                {issueDate()}    
+                                            </TableCell>
+                                        </TableRow>
+                                        
+                                        <TableRow>
+                                            <TableCell variant = "head" component = 'th'>
+                                                Returned On
+                                            </TableCell>
+                                            <TableCell>
+                                                {returnDate()}    
+                                            </TableCell>
+                                        </TableRow>
+                                        </>
+                                    }
+
                                 </TableBody>
                             </Table>
                         </CardContent>
