@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors({
-  origin : 'https://frontend-library-ubdk.onrender.com',
+  origin : 'https://library-management-system-gp14.vercel.app/',
   method : 'GET,POST,DELETE,PATCH,PUT',
   credentials : true
 }))
@@ -51,7 +51,7 @@ connectDb()
     console.log('database connected');
   })
   .then(() => {
-    app.listen(8080, () => console.log("Server is listening on http://localhost:8080"))
+    app.listen(process.env.PORT || 8080, () => console.log("Server is listening on http://localhost:8080"))
   })
   .catch((err) => {
     console.error("Failed to connect to database", err)
