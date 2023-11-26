@@ -30,7 +30,7 @@ export const publishersAndBooks = [
             { title: "Where the Crawdads Sing", category: "Fiction" }
         ]
     },
-    {
+    { 
         publisher: "O'Reilly Media",
         books: [
             { title: "JavaScript: The Good Parts", category: "Programming" },

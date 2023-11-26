@@ -1,9 +1,9 @@
 const router = require("express")()
 const { BookModel } = require("../models/book")
-const { UserModel } = require("../models/user")
+const { UserModel, FeedBackModel } = require("../models/user")
 
 const omitPassword = (user) => {
-  const { password, ...rest } = user
+  const { password, ...rest } = user  
   return rest
 }
 
@@ -148,4 +148,19 @@ router.get("/logout", (req, res) => {
   return res.status(200).json({ success: true })
 })
 
+router.post('/feedback' , (req,res,next) => {
+  try {
+    const newFeedback = new FeedBackModel({
+      name : req.body.name,
+      email : req.body.email,
+      comment : req.body.comment
+    })
+    newFeedback.save();
+    return res.status(200).json({user : 'Feedback sent successfully'});
+  }
+
+  catch(err) {
+    next(err);
+  }
+})
 module.exports = { router }

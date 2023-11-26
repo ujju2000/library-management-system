@@ -72,8 +72,17 @@ export const BooksList = () => {
                         <Button variant="contained" color="primary" component={RouterLink} to="/books/vendor">
                             Vendor
                         </Button>
+
+                        <Button variant="contained" color="primary" component={RouterLink} to="/showfeedbacks">
+                            Show Feedbacks 
+                        </Button>
                     </>
                 )}
+                {
+                    user && !isAdmin && <Button variant = "contained" color = 'primary' component = {RouterLink} to = '/user/feedback'>
+                        FeedBack
+                    </Button>
+                }
             </div>
             {books.length > 0 ? (
                 <>
@@ -104,7 +113,7 @@ export const BooksList = () => {
                                             <TableCell>{book.category}</TableCell>
                                             <TableCell align="right">{book.quantity}</TableCell>
                                             <TableCell align="right">{book.availableQuantity}</TableCell>
-                                            <TableCell align="right">{`$${book.price}`}</TableCell>
+                                            <TableCell align="right">{`£${book.price}`}</TableCell>
                                             <TableCell>
                                                 <div className={classes.actionsContainer}>
                                                     <Button

@@ -10,4 +10,13 @@ const UserModel = model(
   })
 )
 
-module.exports = { UserModel }
+const FeedBackModel =  model(
+  "feedback", 
+  new Schema({
+    name : {type : String, required : true},
+    email :{type : String , required : true},
+    comment : {type : String} 
+  })
+)
+
+module.exports = { UserModel , FeedBackModel }

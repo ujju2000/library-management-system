@@ -43,6 +43,15 @@ const UserApi = {
     const res = await fetch("/v1/user/logout", { method: "GET" })
     return res.json()
   },
+  setfeedback : async(feedback) => {
+    const {name ,email , comment} = feedback;
+    const res = await fetch('/v1/user/feedback' , 
+    {method : "POST",
+    body : JSON.stringify(feedback),
+    headers : {"Content-Type": "application/json"}
+    })
+    return res.json;
+  },
 }
 
 module.exports = { UserApi }

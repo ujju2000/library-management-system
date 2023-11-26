@@ -26,7 +26,8 @@ import { WithAdminProtector } from "../access-control/admin-protector"
 import RegisterButton from "../registerButton/RegisterButton"
 import classes from './styles.module.css';
 import Vendor from "../vendor/Vendor"
-
+import Feedback from "../feedback/Feedback"
+import ShowFeedback from '../showfeedback/ShowFeedback';
 export const AppLayout = () => {
 
     const [openLoginDialog, setOpenLoginDialog] = useState(false)
@@ -70,7 +71,7 @@ export const AppLayout = () => {
         if (!user) {
             navigate("/")
         } else if (isAdmin) {
-            navigate("/admin/books/add")
+            navigate("/admin/books/")
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user, isAdmin])
@@ -184,6 +185,22 @@ export const AppLayout = () => {
                             <WithAdminProtector>
                                 <Vendor />
                             </WithAdminProtector>
+                        </WithLoginProtector>
+                    }
+                 />
+                 <Route path = '/showfeedbacks' 
+                     element={
+                        <WithLoginProtector>
+                            <WithAdminProtector>
+                                <ShowFeedback />
+                            </WithAdminProtector>
+                        </WithLoginProtector>
+                    }
+                 />
+                 <Route path = '/user/feedback' 
+                     element={
+                        <WithLoginProtector>
+                                <Feedback />
                         </WithLoginProtector>
                     }
                  />

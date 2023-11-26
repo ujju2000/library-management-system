@@ -12,7 +12,7 @@ const useUser = () => useContext(UserContext);
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
-    
+    const [feedbacks, setFeedbacks] = useState([]);
     useEffect(() => {
         setIsAdmin(user && user.role === 'admin')
     }, [user])
@@ -25,6 +25,15 @@ const UserProvider = ({ children }) => {
                 setUser(user)
             }
         }).catch(console.error)
+
+        BackendApi.getFeedback().then(({res , error}) => {
+            if(error) {
+                console.log(error);
+            }
+            else {
+                setFeedbacks(res)
+            }
+        }).catch(err => console.error) 
     }, [])
 
     const loginUser = async (username, password) => {
@@ -52,7 +61,7 @@ const UserProvider = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ user, loginUser, logoutUser, isAdmin, registerUser }}>
+        <UserContext.Provider value={{ user, loginUser, logoutUser, isAdmin, registerUser , feedbacks}}>
             {children}
         </UserContext.Provider>
     )
