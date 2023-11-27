@@ -16,6 +16,10 @@ export default function ShowFeedback() {
                 </Typography>
                 <Box sx = {{display : 'grid', gridTemplateColumns : 'repeat(3,1fr)' }}>
                   {
+                    feedbacks.length === 0 ? <>
+                      <Typography variant = 'h3' sx = {{textAlign : 'center'}}>No feedbacks..... </Typography>
+                    </>
+                    :
                     feedbacks.map((feedback) => {
                       return (
                         <Box as = 'div' sx = {{border : '2px solid black ' , margin: 3, textAlign : 'center'}}>
