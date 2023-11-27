@@ -28,6 +28,7 @@ import classes from './styles.module.css';
 import Vendor from "../vendor/Vendor"
 import Feedback from "../feedback/Feedback"
 import ShowFeedback from '../showfeedback/ShowFeedback';
+import AllStudents from "../AllStudents/AllStudents"
 export const AppLayout = () => {
 
     const [openLoginDialog, setOpenLoginDialog] = useState(false)
@@ -43,6 +44,11 @@ export const AppLayout = () => {
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null)
+    }
+    const handleDashboard = () => {
+
+        navigate('/');
+        handleCloseUserMenu();
     }
     const handleRegisterSubmit = (name , username , password) => {
         registerUser(name , username ,password);
@@ -66,7 +72,10 @@ export const AppLayout = () => {
         logoutUser()
         handleCloseUserMenu()
     }
-
+    const handleStudents = () => {
+        navigate('/students');
+        handleCloseUserMenu();
+    }
     useEffect(() => {
         if (!user) {
             navigate("/")
@@ -126,9 +135,14 @@ export const AppLayout = () => {
                                         open={Boolean(anchorElUser)}
                                         onClose={handleCloseUserMenu}
                                     >
-                                        <MenuItem onClick={handleCloseUserMenu}>
+                                        <MenuItem onClick={handleDashboard}>
                                             <Typography textAlign="center">Dashboard</Typography>
                                         </MenuItem>
+                                        {
+                                            isAdmin && <MenuItem onClick = {handleStudents}>
+                                                <Typography textAlign="center">All Students</Typography>
+                                            </MenuItem>
+                                        }
                                         <MenuItem onClick={handleLogout}>
                                             <Typography textAlign="center">Logout</Typography>
                                         </MenuItem>
@@ -193,6 +207,15 @@ export const AppLayout = () => {
                         <WithLoginProtector>
                             <WithAdminProtector>
                                 <ShowFeedback />
+                            </WithAdminProtector>
+                        </WithLoginProtector>
+                    }
+                 />
+                 <Route path = '/students'
+                    element = {
+                        <WithLoginProtector>
+                            <WithAdminProtector>
+                                <AllStudents />
                             </WithAdminProtector>
                         </WithLoginProtector>
                     }

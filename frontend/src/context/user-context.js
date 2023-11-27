@@ -13,6 +13,9 @@ const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
     const [feedbacks, setFeedbacks] = useState([]);
+    const [students, setStudents] = useState([]); 
+    const [borrowBooks, setBorrowBooks] = useState([]);
+
     useEffect(() => {
         setIsAdmin(user && user.role === 'admin')
     }, [user])
@@ -26,14 +29,29 @@ const UserProvider = ({ children }) => {
             }
         }).catch(console.error)
 
-        BackendApi.getFeedback().then(({res , error}) => {
+        BackendApi.getFeedbacks().then((res , error) => {
             if(error) {
                 console.log(error);
             }
             else {
-                setFeedbacks(res)
+                
+                setFeedbacks(res);
             }
-        }).catch(err => console.error) 
+        }).catch(err => console.err) 
+
+        BackendApi.getStudents().then((res, error ) => {
+            if(error) {
+                console.log(error);
+            }
+            else {
+                
+                setStudents(res.users);
+                
+            }
+        })
+
+        BackendApi.book.getAllBooks().then((books) => setBorrowBooks(books.books))
+        .catch((err) => console.log(err));
     }, [])
 
     const loginUser = async (username, password) => {
@@ -59,9 +77,9 @@ const UserProvider = ({ children }) => {
         setUser(null)
         await BackendApi.user.logout()
     }
-
+    
     return (
-        <UserContext.Provider value={{ user, loginUser, logoutUser, isAdmin, registerUser , feedbacks}}>
+        <UserContext.Provider value={{ user, loginUser, logoutUser, isAdmin, registerUser , feedbacks, students, borrowBooks}}>
             {children}
         </UserContext.Provider>
     )

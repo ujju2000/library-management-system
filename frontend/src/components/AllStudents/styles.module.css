@@ -1,0 +1,15 @@
+
+.tableTitle {
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center !important;
+    text-transform: uppercase;
+}
+
+.tableCell {
+   text-align : center !important;
+   font-size : 20px !important;
+   text-transform: capitalize !important;
+    background-color: burlywood;
+}

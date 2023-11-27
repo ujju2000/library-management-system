@@ -1,5 +1,5 @@
 const apiV1 = require("express")()
-const { FeedBackModel } = require("../models/user")
+const { FeedBackModel, UserModel } = require("../models/user")
 const { router: bookRouter } = require("./book")
 const { router: userRouter } = require("./users")
 
@@ -15,4 +15,5 @@ apiV1.get('/feedbacks' , async (req,res,next) => {
         next(err);
     }
 })
+
 module.exports = { apiV1 } 
