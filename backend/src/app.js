@@ -17,11 +17,11 @@ app.use(morgan("dev"))
 app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
-app.use(cors({
-  origin : 'https://library-management-system-gp14.vercel.app/',
-  method : 'GET,POST,DELETE,PATCH,PUT',
-  credentials : true
-}))
+// app.use(cors({
+//   origin : 'https://library-management-system-gp14.vercel.app/',
+//   method : 'GET,POST,DELETE,PATCH,PUT',
+//   credentials : true
+// }))
 app.use(
   sessions({
     secret: process.env.SESSION_SECRET,

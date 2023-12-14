@@ -5,10 +5,13 @@ import {useNavigate} from 'react-router-dom';
 import classes from './style.module.css';
 import {NotificationManager} from 'react-notifications';
 import { BackendApi } from '../../client/backend-api';
+import {useUser} from '../../context/user-context';
 
 export default function Feedback() {
     const [feedback , setFeedback] = useState({name : '', email : '', comment : ''});
     const navigate = useNavigate();
+    const {isLoad} = useUser();
+
     const handleChange = (e) => {
         setFeedback(prev => ({...prev, [e.target.name] : e.target.value}));
     }
@@ -22,6 +25,7 @@ export default function Feedback() {
                navigate('/');
            }
         setFeedback({name : '', email : '', comment : ''});
+        isLoad(true);
     }
   return (
     <>

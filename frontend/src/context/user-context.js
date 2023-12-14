@@ -13,21 +13,14 @@ const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
     const [feedbacks, setFeedbacks] = useState([]);
+    const [load, isLoad] = useState(false);
     const [students, setStudents] = useState([]); 
     const [borrowBooks, setBorrowBooks] = useState([]);
 
     useEffect(() => {
         setIsAdmin(user && user.role === 'admin')
     }, [user])
-
     useEffect(() => {
-        BackendApi.user.getProfile().then(({ user, error }) => {
-            if (error) {
-                console.error(error)
-            } else {
-                setUser(user)
-            }
-        }).catch(console.error)
 
         BackendApi.getFeedbacks().then((res , error) => {
             if(error) {
@@ -38,6 +31,18 @@ const UserProvider = ({ children }) => {
                 setFeedbacks(res);
             }
         }).catch(err => console.err) 
+
+    }, [load])
+    useEffect(() => {
+        BackendApi.user.getProfile().then(({ user, error }) => {
+            if (error) {
+                console.error(error)
+            } else {
+                setUser(user)
+            }
+        }).catch(console.error)
+
+        
 
         BackendApi.getStudents().then((res, error ) => {
             if(error) {
@@ -79,7 +84,7 @@ const UserProvider = ({ children }) => {
     }
     
     return (
-        <UserContext.Provider value={{ user, loginUser, logoutUser, isAdmin, registerUser , feedbacks, students, borrowBooks}}>
+        <UserContext.Provider value={{ user, loginUser, logoutUser, isAdmin, registerUser , feedbacks, students, borrowBooks, isLoad }}>
             {children}
         </UserContext.Provider>
     )

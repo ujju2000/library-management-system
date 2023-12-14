@@ -5,9 +5,7 @@ import {useNavigate} from 'react-router-dom';
 
 export default function ShowFeedback() {
   const {feedbacks} = useUser();
-  useEffect(() => {
-    console.log(feedbacks);
-  }, [])
+  
   const navigate = useNavigate();
   return (
     <Container component={Paper} sx = {{my: 10 , p: 4}}>

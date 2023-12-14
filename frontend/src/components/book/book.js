@@ -143,7 +143,7 @@ export const Book = () => {
                                         <TableCell variant="head" component="th">
                                             Price
                                         </TableCell>
-                                        <TableCell>${book.price}</TableCell>
+                                        <TableCell>£{book.price}</TableCell>
                                     </TableRow>
                                     {
                                         book.borrowedBy.includes(user._id) && 

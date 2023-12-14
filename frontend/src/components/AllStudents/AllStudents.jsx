@@ -18,6 +18,7 @@ export default function AllStudents() {
         }
         return sum;
     }
+    
   return (
     <TableContainer component = {Paper} sx= {{mt : 4 , mx : 'auto' , width : '70%'}}>
         <Table stickyHeader>
